@@ -1,6 +1,4 @@
-# fjordtek-nettverksprosjekt
 
-# Nettverksprosjekt – FjordTek AS
 
 **Fag:** IT / nettverk  
 **Elev:** Thomas Lauritzen 
