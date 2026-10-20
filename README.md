@@ -10,7 +10,7 @@
 
 Formålet med dette prosjektet er å bygge, undersøke og dokumentere et fysisk nettverk og deretter bruke de samme nettverksprinsippene til å bygge et større bedriftsnettverk i Cisco Packet Tracer.
 
-Prosjektet består av to hoveddeler. I den første delen skal jeg koble sammen en Cisco-ruter, en switch, en Windows Server og en bærbar Windows-klient. Jeg skal konfigurere IP-adresser, teste kommunikasjon, sette opp DHCP og undersøke en tjeneste på serveren.
+Prosjektet består av to hoveddeler. I den første delen skal jeg koble sammen en ruter, en switch, en Windows Server og en bærbar Windows-klient. Jeg skal konfigurere IP-adresser, teste kommunikasjon, sette opp DHCP og undersøke en tjeneste på serveren.
 
 I den andre delen skal jeg bygge et simulert bedriftsnettverk for FjordTek AS. Dette nettverket skal ha flere LAN, to rutere, routing mellom nettverkene og tjenestene DHCP, DNS og HTTP.
 
@@ -41,7 +41,7 @@ Kravene skal kontrolleres på nytt i akseptansetesten mot slutten av prosjektet.
 
 Det fysiske nettverket skal bestå av:
 
-- R1 – Cisco-ruter
+- R1 – ruter
 - SW1 – switch
 - SERVER01 – Windows Server
 - CLIENT01 – bærbar Windows-klient
