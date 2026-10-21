@@ -16,7 +16,15 @@ I den andre delen skal jeg bygge et simulert bedriftsnettverk for FjordTek AS. D
 
 Jeg skal dokumentere planlegging, konfigurasjon, testing og feilsøking. Målet er å forstå hvordan fysisk tilkobling, IP-adresser, routing, porter og nettverkstjenester fungerer sammen.
 
-Active Directory og domenetjenester inngår ikke i prosjektet. Windows Server skal brukes som en standalone-server.
+### Avvik fra opprinnelig plan
+
+Den opprinnelige planen var å bruke Windows Server som en standalone-server uten Active Directory eller domenetjenester. Under arbeidet oppdaget jeg at serveren allerede var konfigurert som domenekontroller for domenet `firma.local`.
+
+Jeg valgte å beholde det eksisterende miljøet og bruke den delte mappen `Felles` til å teste kommunikasjon og filtilgang fra klient-PC-en. Under feilsøkingen undersøkte jeg også tilgangsrettigheter og en eksisterende Active Directory-sikkerhetsgruppe, `GG-informasjon-read`.
+
+Dette innebærer at den fysiske delen av prosjektet avviker fra den opprinnelige planen. Jeg dokumenterer derfor den faktiske konfigurasjonen og resultatene fra testene, i stedet for å beskrive serveren som en standalone-server.
+
+En videre forbedring vil være å begrense tilgangsrettighetene til relevante brukere eller grupper og kontrollere at de samsvarer med kravene til prosjektet.
 
 ## 2. Kravspesifikasjon
 
@@ -80,7 +88,11 @@ DHCP-området skal konfigureres på R1. Adresser som brukes av ruteren og server
 
 SERVER01 skal brukes som en standalone-server med fast IP-adresse.
 
-I det fysiske nettverket skal jeg opprette en delt mappe med navnet `Felles`. CLIENT01 skal kunne åpne mappen over nettverket og opprette en testfil.
+I det fysiske nettverket bruker jeg en eksisterende mappe på Windows Server, INFORMASJON, som er delt med nettverksnavnet Felles. Klient-PC-en åpner mappen via \\192.168.0.2\Felles.
+
+Jeg testet fildelingen fra klient-PC-en ved å åpne den delte mappen og forsøke å opprette et tekstdokument. Først fikk jeg en tillatelsesfeil. Under feilsøkingen endret jeg tilgangsrettighetene, og etter endringen kunne jeg opprette et tekstdokument fra klient-PC-en.
+
+Testen viser at fildeling og skrivetilgang fungerer med de gjeldende rettighetene. Tilgangsrettighetene må begrenses til relevante brukere eller grupper før løsningen regnes som ferdig.
 
 I Packet Tracer skal serveren bruke adressen `192.168.30.10/24` og levere DNS- og HTTP-tjenester.
 
@@ -148,17 +160,14 @@ Skjermbilder skal brukes til å vise relevante observasjoner og forklare hva de 
 
 ## 9. Feilsøking
 
-Jeg skal gjennomføre minst én kontrollert feilsøkingsøvelse i det fysiske nettverket.
+### Feilsøking: Skrivetilgang til delt mappe
 
-Feilsøkingen skal dokumenteres med følgende struktur:
-
-- **Symptom:** Hva fungerte ikke?
-- **Hypotese:** Hva kan være årsaken?
-- **Test:** Hvordan undersøkte jeg feilen?
-- **Funn:** Hva viste testen?
-- **Løsning:** Hva ble endret, og fungerte nettverket etterpå?
-
-Faktisk feilsøkingsprosess og resultater legges til etter gjennomføring.
+- **Symptom:** Klient-PC-en kunne åpne den delte mappen `Felles`, men fikk ikke tillatelse til å opprette et tekstdokument.
+- **Hypotese:** Problemet skyldtes manglende tilgangsrettigheter på mappen eller delingen.
+- **Test:** Jeg undersøkte delingsrettighetene og sikkerhetsrettighetene på den fysiske `INFORMASJON`-mappen på Windows Server.
+- **Funn:** Klienten kunne lese mappen, men hadde ikke tilstrekkelig skrivetilgang.
+- **Løsning:** Jeg utvidet rettighetene til alle under feilsøkingen. Etter endringen kunne klienten opprette et tekstdokument i den delte mappen.
+- **Videre forbedring:** Jeg bør begrense rettighetene til relevante domenebrukere eller sikkerhetsgrupper og teste på nytt at riktig bruker har nødvendig tilgang.
 
 ## 10. Akseptansetest
 
@@ -166,10 +175,10 @@ Akseptansetesten skal kontrollere om kravene i kravspesifikasjonen er oppfylt.
 
 | Krav | Test | Forventet resultat | Faktisk resultat |
 |---|---|---|---|
-| K01 | Ping mellom CLIENT01 og SERVER01 | Maskinene kommuniserer | Ikke testet |
+| K01 | Ping mellom CLIENT01 og SERVER01 | Maskinene kommuniserer | 4/4 svar, 0 % pakketap |
 | K02 | Kontroller SERVER01s IP-adresse | Fast adresse er konfigurert | Ikke testet |
 | K03 | Forny DHCP-adresse på CLIENT01 | Klienten får gyldig IP og gateway | Ikke testet |
-| K04 | Åpne Felles og opprette testfil | Filen kan opprettes på serveren | Ikke testet |
+| K04 | Åpne Felles og opprette testfil | Filen kan opprettes på serveren | Bestått med gjeldende rettigheter. Klienten åpnet \\192.168.0.2\Felles og opprettet et tekstdokument. Rettighetene må sikres. |
 | K05 | Ping mellom forskjellige Packet Tracer-LAN | Routing fungerer begge veier | Ikke testet |
 | K06 | Test DHCP, DNS og HTTP | Klientene får riktige innstillinger og intranettet åpnes med DNS-navn | Ikke testet |
 | K07 | Dokumenter testresultatene | Tester og observasjoner er dokumentert | Ikke testet |
