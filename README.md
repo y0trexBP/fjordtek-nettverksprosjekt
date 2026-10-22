@@ -72,7 +72,7 @@ Nettverket skal bruke et isolert labnett.
 
 ## 4. Adresseplan og konfigurasjon
 
-### 4.1 Planlagt adresseplan for fysisk nettverk
+### 4.1 Opprinnelig planlagt adresseplan for fysisk nettverk
 
 | Enhet | IP-adresse | Subnettmaske | Gateway | Tildeling |
 |---|---|---|---|---|
@@ -82,7 +82,42 @@ Nettverket skal bruke et isolert labnett.
 
 DHCP-området skal konfigureres på R1. Adresser som brukes av ruteren og serveren, skal unntas fra DHCP-tildeling.
 
-**Faktisk konfigurasjon og testresultater:** Fylles ut under arbeidet.
+
+### 4.2 Faktisk konfigurasjon av fysisk nettverk
+
+Det fysiske nettverket bruker foreløpig TP-Link-ruteren og adresseområdet `192.168.0.0/24`.
+
+| Enhet | IPv4-adresse | Nettverksmaske | Gateway | IP-tildeling |
+|---|---|---|---|---|
+| Ruter | `192.168.0.1` | `255.255.255.0` | Ikke aktuelt | Eksisterende konfigurasjon |
+| SERVER01 | `192.168.0.2` | `255.255.255.0` | `192.168.0.1` | Statisk |
+| CLIENT01 | `192.168.0.101` | `255.255.255.0` | `192.168.0.1` | DHCP |
+
+På SERVER01 viste `ipconfig /all` at DHCP er deaktivert. Dette stemmer med at serveren bruker en statisk IP-adresse.
+
+På CLIENT01 ble IPv4-innstillingene endret til automatisk tildeling av IP-adresse og DNS-serveradresse. Etterpå viste `ipconfig /all` følgende:
+
+- DHCP aktivert: Ja
+- DHCP-server: `192.168.0.1`
+- IPv4-adresse: `192.168.0.101`
+- Standard gateway: `192.168.0.1`
+
+Dette bekrefter at klienten mottar nettverksinnstillinger automatisk fra TP-Link-ruteren. At klienten beholdt samme IPv4-adresse, betyr ikke at den fortsatt er statisk konfigurert.
+
+**Avvik fra planlagt adresseplan:** Det fysiske nettverket bruker foreløpig `192.168.0.0/24`, mens den opprinnelige planen bruker `192.168.50.0/24`. Den faktiske konfigurasjonen dokumenteres separat fra den planlagte adressestrukturen. Den fysiske konfigurasjonen beholdes foreløpig uendret for å unngå å forstyrre det eksisterende nettverket. Den planlagte adressestrukturen brukes som utgangspunkt dersom det fysiske nettverket senere skal konfigureres etter planen. Packet Tracer-løsningen dokumenteres separat.
+
+### 4.3 Testresultater for fysisk nettverk
+
+Ping-testene ble utført fra CLIENT01.
+
+| Test | Resultat | Status |
+|---|---|---|
+| Ping til gateway `192.168.0.1` | 4 sendt, 4 mottatt, 0 % pakketap | Bestått |
+| Ping til SERVER01 `192.168.0.2` | 4 sendt, 4 mottatt, 0 % pakketap | Bestått |
+
+Begge testene bekreftet at CLIENT01 hadde kontakt med gatewayen og serveren.
+
+
 
 ## 5. Server og tjenester
 
@@ -106,21 +141,62 @@ Navnet skal peke til `192.168.30.10`.
 
 ## 6. Nmap, porter og Wireshark
 
+
 ### 6.1 Nmap
 
-Jeg skal bruke Nmap fra CLIENT01 til å undersøke hvilke porter og tjenester som er tilgjengelige på SERVER01.
+Jeg brukte Nmap fra CLIENT01 for å undersøke hvilke TCP-porter og tjenester som var tilgjengelige på SERVER01 (`192.168.0.2`). Jeg kjørte kommandoen:
 
-Jeg skal dokumentere én eller to relevante porter, med portnummer, tilstand og tjeneste. Undersøkelsen skal begrenses til labserveren.
+```cmd
+nmap -sV 192.168.0.2
+```
 
-### 6.2 Wireshark
+Nmap rapporterte at verten var tilgjengelig, og identifiserte flere åpne TCP-porter.
 
-Jeg skal bruke Wireshark til å undersøke trafikk mellom CLIENT01 og SERVER01.
+| Port | Tjeneste | Observasjon |
+|---|---|---|
+| 53/tcp | DNS | DNS-tjeneste ble identifisert. |
+| 88/tcp | Kerberos | Brukes til autentisering i Active Directory. |
+| 389/tcp | LDAP | Nmap identifiserte LDAP knyttet til domenet `firma.local`. |
+| 445/tcp | Microsoft-DS | Relevant for Windows-fil- og delingstjenester. |
+| 5985/tcp | HTTPAPI | Nmap identifiserte Microsoft HTTPAPI, ofte knyttet til WinRM. |
 
-Først skal jeg fange opp ICMP-trafikk ved hjelp av ping. Deretter skal jeg undersøke TCP-trafikk når klienten åpner den delte mappen.
+Nmap identifiserte også vertsnavnet `DC01` og domenet `firma.local`. Dette støtter observasjonen om at serveren allerede er konfigurert som domenekontroller.
 
-Jeg skal sammenligne hva Nmap forteller om tilgjengelige tjenester, med hva Wireshark viser om trafikken som faktisk sendes mellom maskinene.
+**Resultat:** Nmap-testen er gjennomført. Flere TCP-porter ble rapportert som åpne. 987 andre TCP-porter ble rapportert som filtrerte, det vil si at Nmap ikke mottok svar som gjorde det mulig å fastslå tilstanden deres.
 
-**Skjermbilder og faktiske observasjoner:** Legges til etter testene.
+**Vurdering:** Port 445 er spesielt relevant for prosjektet fordi klienten bruker den delte mappen `Felles`. Skanningen viser hvilke tjenester som er tilgjengelige fra klienten, men beviser ikke alene at tjenestene er sikkert konfigurert.
+
+**Dokumentasjon:** Jeg skal legge til et skjermbilde av Nmap-resultatet i prosjektets `images`-mappe.
+
+### 6.2 Wireshark – ICMP
+
+Jeg startet en pakkefangst i Wireshark på Ethernet-grensesnittet og utførte en ping-test fra CLIENT01 til SERVER01 (`192.168.0.2`). Med visningsfilteret `icmp` fant jeg både Echo (ping) request og Echo (ping) reply.
+
+- **ICMP request:** Source `192.168.0.101`, destination `192.168.0.2`.
+- **ICMP reply:** Source `192.168.0.2`, destination `192.168.0.101`.
+- **Lengde:** Wireshark viste 74 byte for pakken jeg undersøkte.
+
+Dette viser at klienten sendte en ICMP-forespørsel til serveren, og at serveren sendte et svar tilbake. Resultatet samsvarer med ping-testen, som fikk svar fra serveren.
+
+**Dokumentasjon:** Legg ved et skjermbilde fra Wireshark som viser både request og reply.
+
+#### TCP og SMB-fildeling
+
+Jeg startet en pakkefangst i Wireshark mens jeg åpnet den delte mappen `\\192.168.0.2\Felles` fra CLIENT01. Jeg brukte visningsfilteret `tcp && ip.addr == 192.168.0.2`.
+
+Jeg observerte følgende TCP-pakker:
+
+1. **SYN:** `192.168.0.101:53940` til `192.168.0.2:445`.
+2. **SYN, ACK:** `192.168.0.2:445` til `192.168.0.101:53940`.
+3. **ACK:** `192.168.0.101:53940` til `192.168.0.2:445`.
+
+Dette er TCP three-way handshake. Port 445 brukes vanligvis til SMB-fildeling i Windows. Pakkene viser at klienten opprettet en TCP-forbindelse til serveren på denne porten.
+
+Sammen med den vellykkede testen der jeg åpnet delingen og opprettet en testfil, støtter dette at nettverksforbindelsen og fildelingen fungerer.
+
+**Dokumentasjon:** Legg ved et skjermbilde som viser de tre TCP-pakkene i Wireshark.
+
+
 
 ## 7. Packet Tracer – topologi og routing
 
@@ -176,8 +252,8 @@ Akseptansetesten skal kontrollere om kravene i kravspesifikasjonen er oppfylt.
 | Krav | Test | Forventet resultat | Faktisk resultat |
 |---|---|---|---|
 | K01 | Ping mellom CLIENT01 og SERVER01 | Maskinene kommuniserer | 4/4 svar, 0 % pakketap |
-| K02 | Kontroller SERVER01s IP-adresse | Fast adresse er konfigurert | Ikke testet |
-| K03 | Forny DHCP-adresse på CLIENT01 | Klienten får gyldig IP og gateway | Ikke testet |
+| K02 | Kontroller SERVER01s IP-adresse | Fast adresse er konfigurert | Bestått: 192.168.0.2, DHCP deaktivert, statisk IP. |
+| K03 | Forny DHCP-adresse på CLIENT01 | Klienten får gyldig IP og gateway | Bestått: DHCP aktivert, DHCP-server 192.168.0.1, klientadresse 192.168.0.101. |
 | K04 | Åpne Felles og opprette testfil | Filen kan opprettes på serveren | Bestått med gjeldende rettigheter. Klienten åpnet \\192.168.0.2\Felles og opprettet et tekstdokument. Rettighetene må sikres. |
 | K05 | Ping mellom forskjellige Packet Tracer-LAN | Routing fungerer begge veier | Ikke testet |
 | K06 | Test DHCP, DNS og HTTP | Klientene får riktige innstillinger og intranettet åpnes med DNS-navn | Ikke testet |
