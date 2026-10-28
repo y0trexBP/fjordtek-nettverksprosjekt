@@ -206,7 +206,19 @@ Nettverket skal bestå av minst to rutere, fire switcher, tre klientnett og et e
 ### Nettverkstopologi
 ![Packet Tracer-nettverk](packet%20tracer%20nett.png)
 
-### 7.1 Planlagt adresseplan
+### 7.1 Ping mellom PC-ADMIN og PC-SALES
+
+Ping-testen bekreftet at PC-ADMIN kunne kommunisere med PC-SALES på tvers av nettverkene.
+
+![Ping Admin til Sales](images/ping%20admin%20sales.png)
+
+### 7.2 Traceroute fra PC-ADMIN
+
+Traceroute viste veien gjennom R1 og R2 til servernettverket.
+
+![Traceroute-test](images/tracing%20csico%20oppgave.png)
+
+### 7.3 Planlagt adresseplan
 
 | Nettverk | Nettadresse | Planlagt gateway |
 |---|---|---|
@@ -234,7 +246,11 @@ Jeg skal gjennomføre følgende undersøkelser:
 2. Kommunikasjon fra Administrasjon til Salg, med fokus på trafikken gjennom R1 og R2.
 3. Åpning av intranettsiden med DNS-navn, med fokus på DNS-oppslag og HTTP-trafikk.
 
-Skjermbilder skal brukes til å vise relevante observasjoner og forklare hva de forteller om nettverket.
+### DNS- og HTTP-test
+
+DNS-navnet `intranett.fjordtek.local` ble brukt for å åpne intranettsiden fra en klient. I Simulation Mode ble DNS- og HTTP-trafikken undersøkt.
+
+![DNS og HTTP i Packet Tracer](images/cisco%20dns%26http%20test.png)
 
 ## 9. Feilsøking
 
