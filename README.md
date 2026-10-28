@@ -204,7 +204,7 @@ Bedriftsnettverket skal representere FjordTek AS, med hovedkontor og salgsavdeli
 
 Nettverket skal bestå av minst to rutere, fire switcher, tre klientnett og et eget servernett.
 ### Nettverkstopologi
-![Packet Tracer-nettverk](packet%20tracer%20nett.png)
+![Packet Tracer-nettverk](images/packet%20tracer%20nett.png)
 
 ### 7.1 Ping mellom PC-ADMIN og PC-SALES
 
