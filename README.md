@@ -203,6 +203,8 @@ Sammen med den vellykkede testen der jeg åpnet delingen og opprettet en testfil
 Bedriftsnettverket skal representere FjordTek AS, med hovedkontor og salgsavdeling.
 
 Nettverket skal bestå av minst to rutere, fire switcher, tre klientnett og et eget servernett.
+### Nettverkstopologi
+![Packet Tracer-nettverk](packet%20tracer%20nett.png)
 
 ### 7.1 Planlagt adresseplan
 
