@@ -121,23 +121,33 @@ Begge testene bekreftet at CLIENT01 hadde kontakt med gatewayen og serveren.
 
 ## 5. Server og tjenester
 
-SERVER01 skal brukes som en standalone-server med fast IP-adresse.
+### 5.1 Fysisk nettverk – Windows Server
 
-I det fysiske nettverket bruker jeg en eksisterende mappe på Windows Server, INFORMASJON, som er delt med nettverksnavnet Felles. Klient-PC-en åpner mappen via \\192.168.0.2\Felles.
+SERVER01 kjører Windows Server 2025 Standard og er konfigurert som domenekontroller for domenet `firma.local`. Dette avviker fra den opprinnelige planen, der serveren skulle være en standalone-server uten Active Directory.
 
-Jeg testet fildelingen fra klient-PC-en ved å åpne den delte mappen og forsøke å opprette et tekstdokument. Først fikk jeg en tillatelsesfeil. Under feilsøkingen endret jeg tilgangsrettighetene, og etter endringen kunne jeg opprette et tekstdokument fra klient-PC-en.
+SERVER01 bruker statisk IP-adresse `192.168.0.2/24`, med standard gateway `192.168.0.1`. DHCP er deaktivert på serveren.
 
-Testen viser at fildeling og skrivetilgang fungerer med de gjeldende rettighetene. Tilgangsrettighetene må begrenses til relevante brukere eller grupper før løsningen regnes som ferdig.
+### 5.2 Fildeling
 
-I Packet Tracer skal serveren bruke adressen `192.168.30.10/24` og levere DNS- og HTTP-tjenester.
+På SERVER01 bruker jeg den eksisterende mappen `D:\data\INFORMASJON`, som er delt med nettverksnavnet `Felles`. Klient-PC-en åpner delingen via:
 
-DNS-navnet skal være:
+`\\192.168.0.2\Felles`
+
+Jeg testet fildelingen fra CLIENT01 ved å åpne mappen og forsøke å opprette et tekstdokument. Først fikk jeg en tillatelsesfeil. Under feilsøkingen endret jeg tilgangsrettighetene, og etter endringen kunne klienten opprette et dokument.
+
+Testen viser at fildelingen fungerte med de endrede rettighetene. Tilgangene må sikres videre ved å gi bare relevante brukere eller sikkerhetsgrupper nødvendige rettigheter.
+
+### 5.3 Packet Tracer – DNS og HTTP
+
+I Packet Tracer bruker serveren IP-adressen `192.168.30.10/24` og standard gateway `192.168.30.1`.
+
+DNS-tjenesten er konfigurert med navnet:
 
 `intranett.fjordtek.local`
 
-Navnet skal peke til `192.168.30.10`.
+DNS-navnet peker til `192.168.30.10`. HTTP-tjenesten er aktivert på serveren. DNS- og HTTP-trafikken er undersøkt i Simulation Mode og dokumentert med skjermbilder i seksjon 8.
 
-**Resultater fra fildeling, DNS og HTTP:** Fylles ut etter testing.
+Det fysiske nettverket og Packet Tracer-nettverket er separate oppsett. De bruker forskjellige IP-adresser og skal derfor dokumenteres hver for seg.
 
 ## 6. Nmap, porter og Wireshark
 
