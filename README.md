@@ -47,28 +47,38 @@ Kravene skal kontrolleres på nytt i akseptansetesten mot slutten av prosjektet.
 
 ### 3.1 Utstyr
 
-Det fysiske nettverket skal bestå av:
+Det fysiske nettverket består av:
 
-- R1 – ruter
-- SW1 – switch
-- SERVER01 – Windows Server
+- En TP-Link-ruter
+- En switch (SW1)
+- SERVER01 – Windows Server 2025 Standard
 - CLIENT01 – bærbar Windows-klient
 
-### 3.2 Planlagt topologi
+### 3.2 Faktisk topologi
+
+SERVER01 og CLIENT01 er koblet til SW1. SW1 er koblet videre til TP-Link-ruteren. Ruteren fungerer som standard gateway for enhetene i det fysiske nettverket.
 
 ```text
 SERVER01 ──┐
-            ├── SW1 ─── R1
+           ├── SW1 ─── TP-Link-ruter
 CLIENT01 ──┘
 ```
 
-SERVER01 og CLIENT01 kobles til SW1. SW1 kobles videre til LAN-grensesnittet på R1.
+### 3.3 Fysisk nettverkskonfigurasjon
 
-Nettverket skal bruke et isolert labnett.
+Det fysiske nettverket bruker adresseområdet `192.168.0.0/24`.
 
-**Fysisk tilkobling og porter:** Fylles ut etter at utstyret er koblet til.
+- **Ruter:** `192.168.0.1`
+- **SERVER01:** `192.168.0.2` – statisk IP-adresse
+- **CLIENT01:** `192.168.0.101` – mottar IP-adresse via DHCP
 
-**Skjermbilde av fysisk topologi:** Legges til etter at nettverket er bygget.
+Klienten ble testet mot både ruteren og serveren. Begge ping-testene ga fire svar av fire, uten pakketap. Resultatene er dokumentert i seksjon 4.
+
+### 3.4 Avvik fra planlagt topologi
+
+Den opprinnelige planen beskrev en egen ruter (R1) med adresseområdet `192.168.50.0/24`. I den faktiske løsningen ble den eksisterende TP-Link-ruteren og adresseområdet `192.168.0.0/24` beholdt.
+
+Den faktiske konfigurasjonen dokumenteres separat fra den opprinnelige planen. Packet Tracer-nettverket beskrives i seksjon 7.
 
 ## 4. Adresseplan og konfigurasjon
 
