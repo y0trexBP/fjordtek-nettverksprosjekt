@@ -265,13 +265,29 @@ DHCP er konfigurert for klientnettverkene. Serveren bruker IP-adressen `192.168.
 
 ## 8. Simulation Mode
 
-Simulation Mode skal brukes til å undersøke hvordan pakker beveger seg gjennom nettverket.
+Simulation Mode ble brukt til å undersøke hvordan pakker beveger seg gjennom nettverket.
 
-Jeg skal gjennomføre følgende undersøkelser:
+### 8.1 ARP og ICMP
 
-1. Kommunikasjon mellom to klienter i samme LAN, med fokus på ARP og ICMP.
-2. Kommunikasjon fra Administrasjon til Salg, med fokus på trafikken gjennom R1 og R2.
-3. Åpning av intranettsiden med DNS-navn, med fokus på DNS-oppslag og HTTP-trafikk.
+Jeg undersøkte nettverkstrafikk mellom klienter og observerte hvordan ARP brukes til å finne MAC-adressen til en enhet på det lokale nettverket. Jeg undersøkte også ICMP-trafikk som brukes ved ping-testing.
+
+### 8.2 Kommunikasjon mellom Administrasjon og Salg
+
+Jeg testet kommunikasjon mellom klienter i forskjellige LAN. Traceroute fra PC-ADMIN til serveren viste følgende vei:
+
+1. R1: `192.168.10.1`
+2. R2: `10.0.0.2`
+3. Server: `192.168.30.10`
+
+Dette viser at trafikken gikk gjennom begge ruterne før den nådde serveren.
+
+![Traceroute-test](images/tracing%20csico%20oppgave.png)
+
+### 8.3 DNS og HTTP
+
+Jeg konfigurerte DNS-navnet `intranett.fjordtek.local` til å peke på serveren `192.168.30.10`. HTTP-tjenesten ble aktivert på serveren. Jeg undersøkte DNS- og HTTP-trafikken i Simulation Mode.
+
+![DNS og HTTP i Packet Tracer](images/cisco%20dns%26http%20test.png)
 
 ### DNS- og HTTP-test
 
