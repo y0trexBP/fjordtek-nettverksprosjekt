@@ -234,7 +234,34 @@ Det skal konfigureres statiske ruter mellom ruterne, slik at klienter i de forsk
 
 DHCP skal gi klientene nettverksinnstillinger. Serveren skal levere DNS og HTTP.
 
-**Faktisk topologi, grensesnitt, rutetabeller og konfigurasjoner:** Fylles ut etter bygging og testing.
+### 7.4 Faktisk topologi og konfigurasjon
+
+Packet Tracer-nettverket er bygget med to rutere, fire switcher, tre klientnett og ett eget servernett.
+
+**Tilkoblinger**
+
+- R1 G0/0 → SW1 – Administrasjon
+- R1 G0/1 → SW2 – Support
+- R1 G0/2 → R2 G0/0 – forbindelse mellom ruterne
+- R2 G0/1 → SW3 – Servernett
+- R2 G0/2 → SW4 – Salg
+
+**IP-adresser på rutere**
+
+| Ruter | Grensesnitt | IP-adresse |
+|---|---|---|
+| R1 | G0/0 | 192.168.10.1/24 |
+| R1 | G0/1 | 192.168.20.1/24 |
+| R1 | G0/2 | 10.0.0.1/30 |
+| R2 | G0/0 | 10.0.0.2/30 |
+| R2 | G0/1 | 192.168.30.1/24 |
+| R2 | G0/2 | 192.168.40.1/24 |
+
+Det er konfigurert statiske ruter mellom R1 og R2 for kommunikasjon mellom nettverkene.
+
+DHCP er konfigurert for klientnettverkene. Serveren bruker IP-adressen `192.168.30.10/24`, med gateway `192.168.30.1`, og leverer DNS- og HTTP-tjenester.
+
+![Packet Tracer-nettverk](images/packet%20tracer%20nett.png)
 
 ## 8. Simulation Mode
 
