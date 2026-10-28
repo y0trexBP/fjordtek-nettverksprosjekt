@@ -308,20 +308,20 @@ DNS-navnet `intranett.fjordtek.local` ble brukt for å åpne intranettsiden fra 
 
 ## 10. Akseptansetest
 
-Akseptansetesten skal kontrollere om kravene i kravspesifikasjonen er oppfylt.
+Akseptansetesten kontrollerer om kravene i kravspesifikasjonen er oppfylt. Resultatene fra det fysiske nettverket og Packet Tracer dokumenteres separat.
 
-| Krav | Test | Forventet resultat | Faktisk resultat |
+| **Krav** | **Test** | **Forventet resultat** | **Faktisk resultat** |
 |---|---|---|---|
-| K01 | Ping mellom CLIENT01 og SERVER01 | Maskinene kommuniserer | 4/4 svar, 0 % pakketap |
-| K02 | Kontroller SERVER01s IP-adresse | Fast adresse er konfigurert | Bestått: 192.168.0.2, DHCP deaktivert, statisk IP. |
-| K03 | Forny DHCP-adresse på CLIENT01 | Klienten får gyldig IP og gateway | Bestått: DHCP aktivert, DHCP-server 192.168.0.1, klientadresse 192.168.0.101. |
-| K04 | Åpne Felles og opprette testfil | Filen kan opprettes på serveren | Bestått med gjeldende rettigheter. Klienten åpnet \\192.168.0.2\Felles og opprettet et tekstdokument. Rettighetene må sikres. |
-| K05 | Ping mellom forskjellige Packet Tracer-LAN | Routing fungerer begge veier | Ikke testet |
-| K06 | Test DHCP, DNS og HTTP | Klientene får riktige innstillinger og intranettet åpnes med DNS-navn | Ikke testet |
-| K07 | Dokumenter testresultatene | Tester og observasjoner er dokumentert | Ikke testet |
-| K08 | Fang opp ICMP- og TCP-trafikk i Wireshark | Relevant trafikk kan identifiseres | Ikke testet |
+| K01 | Ping mellom CLIENT01 og SERVER01 | Maskinene kommuniserer | Bestått: 4 svar av 4, 0 % pakketap. |
+| K02 | Kontroller SERVER01s IP-adresse | Fast adresse er konfigurert | Bestått: `192.168.0.2`, statisk IP og DHCP deaktivert. |
+| K03 | Kontroller DHCP på CLIENT01 | Klienten får gyldig IP og gateway | Bestått: DHCP aktivert, klientadresse `192.168.0.101`, gateway `192.168.0.1`. |
+| K04 | Åpne Felles og opprette testfil | Klienten kan opprette en fil på serveren | Bestått med gjeldende rettigheter. Rettighetene må begrenses til relevante brukere eller grupper. |
+| K05 | Test kommunikasjon mellom Packet Tracer-nettverk | Routing gir kommunikasjon mellom nettverkene | Bestått: Ping til serveren fra Administrasjon, Support og Salg fungerte. Ping mellom PC-ADMIN og PC-SALES er også dokumentert. |
+| K06 | Test DHCP, DNS og HTTP i Packet Tracer | Klientene får nettverksinnstillinger, og intranettet kan åpnes med DNS-navn | DHCP er konfigurert. DNS-navnet `intranett.fjordtek.local` peker til `192.168.30.10`, og HTTP er aktivert. |
+| K07 | Dokumenter testresultatene | Tester og observasjoner er dokumentert | Dokumentert i README med testresultater og skjermbilder. |
+| K08 | Fang opp ICMP- og TCP-trafikk i Wireshark | Relevant trafikk kan identifiseres | Bestått: ICMP request/reply og TCP three-way handshake mot port 445 ble observert. |
 
-«Ikke testet» betyr at testen ennå ikke er gjennomført. Resultatene skal oppdateres når testene er utført.
+**Merknad:** Resultatene gjelder testene som er dokumentert i prosjektet. Fildelingstesten fungerte etter at rettighetene ble utvidet, men tilgangene må sikres bedre før løsningen regnes som ferdig.
 
 ## 11. Oppsummering og refleksjon
 
