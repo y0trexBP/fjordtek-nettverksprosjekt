@@ -345,13 +345,37 @@ Akseptansetesten kontrollerer om kravene i kravspesifikasjonen er oppfylt. Resul
 
 ## 11. Oppsummering og refleksjon
 
-Dette prosjektet skal vise hvordan nettverksprinsipper fra et lite fysisk nettverk kan brukes i et større simulert bedriftsnettverk.
+### 11.1 Oppsummering
 
-I refleksjonen skal jeg forklare sammenhengen mellom fysisk tilkobling, IP-adresser, gateway, routing, porter og tjenester.
+I dette prosjektet har jeg arbeidet med både et fysisk nettverk og et simulert bedriftsnettverk i Cisco Packet Tracer. Målet har vært å forstå hvordan fysisk tilkobling, IP-adresser, DHCP, gateway, routing og nettverkstjenester fungerer sammen.
 
-Jeg skal også sammenligne det fysiske nettverket med Packet Tracer-løsningen, beskrive utfordringer jeg møtte, forklare hvordan feil ble funnet og rettet, og foreslå forbedringer.
+I det fysiske nettverket brukte jeg en TP-Link-ruter, en switch, en Windows Server og en klient-PC. Jeg dokumenterte IP-konfigurasjonen og testet kommunikasjonen med ping. Klienten fikk nettverksinnstillinger via DHCP, og ping-testene mot ruteren og serveren ga svar uten pakketap.
 
-Denne delen ferdigstilles når prosjektet og testene er gjennomført.
+Jeg undersøkte også tilgjengelige porter og tjenester på serveren med Nmap. Med Wireshark undersøkte jeg ICMP-trafikk og TCP-forbindelsen som ble opprettet ved bruk av SMB-fildeling.
+
+I Packet Tracer bygget jeg et bedriftsnettverk med to rutere, fire switcher, flere LAN og et eget servernett. Jeg konfigurerte statiske ruter og DHCP, og testet kommunikasjon mellom nettverkene. Jeg undersøkte også trafikken i Simulation Mode for å få bedre forståelse av hvordan pakker beveger seg gjennom nettverket.
+
+### 11.2 Utfordringer og feilsøking
+
+En utfordring i det fysiske nettverket var at klienten først kunne åpne den delte mappen, men ikke opprette et tekstdokument. Jeg undersøkte tilgangsrettighetene og endret dem under feilsøkingen. Etter endringen fungerte skrivetilgangen.
+
+Denne feilen viste meg at det ikke er nok at nettverksforbindelsen fungerer. Tilgangsrettighetene på serveren må også være riktig konfigurert. I en ferdig løsning bør rettighetene begrenses til relevante brukere eller sikkerhetsgrupper.
+
+Jeg oppdaget også at den faktiske konfigurasjonen av det fysiske nettverket avvek fra den opprinnelige planen. Jeg beholdt den eksisterende TP-Link-ruteren og dokumenterte det faktiske adresseområdet separat fra den planlagte adressestrukturen.
+
+### 11.3 Hva jeg har lært
+
+Gjennom prosjektet har jeg fått bedre forståelse av hvordan IP-adresser, subnettmasker og standard gateway brukes for kommunikasjon i et nettverk. Jeg har også lært mer om hvordan DHCP tildeler nettverksinnstillinger automatisk, og hvordan rutere videresender trafikk mellom forskjellige nettverk.
+
+Nmap ga meg erfaring med å undersøke åpne porter og tilgjengelige tjenester. Wireshark gjorde det mulig å se nettverkstrafikken direkte, blant annet ICMP request/reply og TCP three-way handshake. Dette gjorde sammenhengen mellom nettverkskommunikasjon og tjenestene på serveren lettere å forstå.
+
+Packet Tracer ga meg mulighet til å bygge og teste en større nettverksstruktur uten å måtte koble sammen alt det fysiske utstyret.
+
+### 11.4 Forbedringer
+
+Hvis jeg skulle videreutvikle prosjektet, ville jeg først sikret fildelingen ved å gi bare relevante brukere og grupper nødvendige rettigheter. Jeg ville også gjennomført en ny tilgangstest for å kontrollere at riktige brukere kan lese og skrive, mens andre ikke får unødvendig tilgang.
+
+Videre ville jeg samlet alle konfigurasjoner og testresultater på en ryddig måte, tatt skjermbilder av de viktigste testene og kontrollert at alle krav i akseptansetesten var dokumentert. Jeg ville også sammen
 
 ## 12. Prosjektstyring og filer
 
