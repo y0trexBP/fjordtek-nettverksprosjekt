@@ -383,7 +383,7 @@ Jeg ville også kontrollert at alle testresultater er dokumentert med tydelige s
 
 Prosjektet organiseres og følges opp i GitHub Projects. Prosjektbrettet viser oppgavene og fremdriften gjennom statusene Todo, In progress og Done.
 
-- **Prosjektbrett:** [Sett inn lenken til GitHub Projects-brettet]
+- **Prosjektbrett:** https://github.com/users/y0trexBP/projects/1
 
 ### 12.2 Mappestruktur
 
