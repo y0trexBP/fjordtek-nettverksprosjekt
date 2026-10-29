@@ -373,27 +373,33 @@ Packet Tracer ga meg mulighet til å bygge og teste en større nettverksstruktur
 
 ### 11.4 Forbedringer
 
-Hvis jeg skulle videreutvikle prosjektet, ville jeg først sikret fildelingen ved å gi bare relevante brukere og grupper nødvendige rettigheter. Jeg ville også gjennomført en ny tilgangstest for å kontrollere at riktige brukere kan lese og skrive, mens andre ikke får unødvendig tilgang.
+Hvis jeg skulle videreutvikle prosjektet, ville jeg først sikret fildelingen ved å gi bare relevante brukere og grupper nødvendige rettigheter. Jeg ville deretter testet at riktige brukere kan lese og skrive, mens andre brukere ikke får unødvendig tilgang.
 
-Videre ville jeg samlet alle konfigurasjoner og testresultater på en ryddig måte, tatt skjermbilder av de viktigste testene og kontrollert at alle krav i akseptansetesten var dokumentert. Jeg ville også sammen
+Jeg ville også kontrollert at alle testresultater er dokumentert med tydelige skjermbilder, og at README-filen, Packet Tracer-filen og prosjektbrettet er oppdatert. Til slutt ville jeg gått gjennom kravspesifikasjonen punkt for punkt for å sikre at alle krav er testet og dokumentert.
 
 ## 12. Prosjektstyring og filer
 
-**GitHub Projects:** [Legg inn lenke til prosjektbrettet]
+### 12.1 Prosjektstyring
 
-### Planlagt mappestruktur
+Prosjektet organiseres og følges opp i GitHub Projects. Prosjektbrettet viser oppgavene og fremdriften gjennom statusene Todo, In progress og Done.
+
+- **Prosjektbrett:** [Sett inn lenken til GitHub Projects-brettet]
+
+### 12.2 Mappestruktur
+
+Prosjektfilene er organisert slik at dokumentasjonen, skjermbildene og Packet Tracer-filen er enkle å finne.
 
 ```text
 fjordtek-nettverksprosjekt/
 ├── README.md
 ├── packet-tracer/
-│   └── fjordtek.pkt
-├── images/
-│   ├── fysisk-topologi.png
-│   ├── fysisk-test.png
-│   └── packet-tracer-topologi.png
-└── docs/
-    └── ekstra-dokumentasjon.md
+│   ├── cisco packet tracer oppgave.pkt
+│   └── README.md
+└── images/
+    ├── packet tracer nett.png
+    ├── tracing csico oppgave.png
+    ├── ping admin sales.png
+    └── cisco dns&http test.png
 ```
 
-Filene og bildene legges til etter hvert som arbeidet utføres. Ikke alle eksempelfilene i strukturen er opprettet ennå.
+`README.md` i hovedmappen inneholder prosjektdokumentasjonen. Mappen `packet-tracer/` inneholder den simulerte nettverksløsningen, mens `images/` inneholder skjermbilder av nettverket og testene.
