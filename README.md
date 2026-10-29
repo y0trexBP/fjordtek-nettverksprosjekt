@@ -400,7 +400,7 @@ Prosjektet organiseres og følges opp i GitHub Projects. Prosjektbrettet viser o
 
 ### 12.2 Mappestruktur
 
-Prosjektfilene er organisert slik at dokumentasjonen, skjermbildene og Packet Tracer-filen er enkle å finne.
+Prosjektet er organisert med en egen mappe for Packet Tracer-filen og en mappe for skjermbilder fra testene.
 
 ```text
 fjordtek-nettverksprosjekt/
@@ -409,10 +409,15 @@ fjordtek-nettverksprosjekt/
 │   ├── cisco packet tracer oppgave.pkt
 │   └── README.md
 └── images/
+    ├── cisco dns&http test.png
+    ├── cisco dns&http test2.png
     ├── packet tracer nett.png
-    ├── tracing csico oppgave.png
     ├── ping admin sales.png
-    └── cisco dns&http test.png
+    ├── tracing csico oppgave.png
+    ├── klient-pc-tillgang.png
+    ├── oppgave nmap.png
+    ├── wireshark oppgave.png
+    └── wireshark tcp 6.2.png
 ```
 
-`README.md` i hovedmappen inneholder prosjektdokumentasjonen. Mappen `packet-tracer/` inneholder den simulerte nettverksløsningen, mens `images/` inneholder skjermbilder av nettverket og testene.
+Bildene i `images/` dokumenterer nettverkstopologien, ping- og traceroute-tester, DNS- og HTTP-tester, tilgang til fildeling, Nmap-skanning og Wireshark-analyse av ICMP- og TCP-trafikk.
