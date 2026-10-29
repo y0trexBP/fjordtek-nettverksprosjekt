@@ -327,7 +327,7 @@ Jeg konfigurerte DNS-navnet `intranett.fjordtek.local` til å peke på serveren 
 
 DNS-navnet `intranett.fjordtek.local` ble brukt for å åpne intranettsiden fra en klient. I Simulation Mode ble DNS- og HTTP-trafikken undersøkt.
 
-![DNS og HTTP i Packet Tracer](images/cisco%20dns%26http%20test.png)
+![DNS og HTTP i Packet Tracer](images/cisco%20dns%26http%20test2.png)
 
 ## 9. Feilsøking
 
