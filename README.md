@@ -147,6 +147,9 @@ Jeg testet fildelingen fra CLIENT01 ved å åpne mappen og forsøke å opprette 
 
 Testen viser at fildelingen fungerte med de endrede rettighetene. Tilgangene må sikres videre ved å gi bare relevante brukere eller sikkerhetsgrupper nødvendige rettigheter.
 
+![Mappedeling fra server til klient-PC](images/klient-pc-tillgang.png)
+
+
 ### 5.3 Packet Tracer – DNS og HTTP
 
 I Packet Tracer bruker serveren IP-adressen `192.168.30.10/24` og standard gateway `192.168.30.1`.
@@ -180,6 +183,9 @@ Nmap rapporterte at verten var tilgjengelig, og identifiserte flere åpne TCP-po
 | 445/tcp | Microsoft-DS | Relevant for Windows-fil- og delingstjenester. |
 | 5985/tcp | HTTPAPI | Nmap identifiserte Microsoft HTTPAPI, ofte knyttet til WinRM. |
 
+![Nmap-test av SERVER01](images/oppgave%20nmap.png)
+
+
 Nmap identifiserte også vertsnavnet `DC01` og domenet `firma.local`. Dette støtter observasjonen om at serveren allerede er konfigurert som domenekontroller.
 
 **Resultat:** Nmap-testen er gjennomført. Flere TCP-porter ble rapportert som åpne. 987 andre TCP-porter ble rapportert som filtrerte, det vil si at Nmap ikke mottok svar som gjorde det mulig å fastslå tilstanden deres.
@@ -198,6 +204,9 @@ Jeg startet en pakkefangst i Wireshark på Ethernet-grensesnittet og utførte en
 
 Dette viser at klienten sendte en ICMP-forespørsel til serveren, og at serveren sendte et svar tilbake. Resultatet samsvarer med ping-testen, som fikk svar fra serveren.
 
+![Wireshark ICMP-test](images/wireshark%20oppgave.png)
+
+
 **Dokumentasjon:** Legg ved et skjermbilde fra Wireshark som viser både request og reply.
 
 #### TCP og SMB-fildeling
@@ -214,7 +223,9 @@ Dette er TCP three-way handshake. Port 445 brukes vanligvis til SMB-fildeling i 
 
 Sammen med den vellykkede testen der jeg åpnet delingen og opprettet en testfil, støtter dette at nettverksforbindelsen og fildelingen fungerer.
 
-**Dokumentasjon:** Legg ved et skjermbilde som viser de tre TCP-pakkene i Wireshark.
+
+![Wireshark TCP-test mot port 445](images/wireshark%20tcp6.2.png)
+
 
 
 
