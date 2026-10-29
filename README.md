@@ -224,7 +224,9 @@ Dette er TCP three-way handshake. Port 445 brukes vanligvis til SMB-fildeling i 
 Sammen med den vellykkede testen der jeg åpnet delingen og opprettet en testfil, støtter dette at nettverksforbindelsen og fildelingen fungerer.
 
 
-![Wireshark TCP-test mot port 445](images/wireshark%20tcp6.2.png)
+
+![Wireshark TCP-test mot port 445](images/wireshark%20tcp%206.2.png)
+
 
 
 
