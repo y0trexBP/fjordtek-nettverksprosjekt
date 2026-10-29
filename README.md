@@ -183,7 +183,6 @@ Nmap rapporterte at verten var tilgjengelig, og identifiserte flere åpne TCP-po
 | 445/tcp | Microsoft-DS | Relevant for Windows-fil- og delingstjenester. |
 | 5985/tcp | HTTPAPI | Nmap identifiserte Microsoft HTTPAPI, ofte knyttet til WinRM. |
 
-![Nmap-test av SERVER01](images/oppgave%20nmap.png)
 
 
 Nmap identifiserte også vertsnavnet `DC01` og domenet `firma.local`. Dette støtter observasjonen om at serveren allerede er konfigurert som domenekontroller.
@@ -192,7 +191,8 @@ Nmap identifiserte også vertsnavnet `DC01` og domenet `firma.local`. Dette stø
 
 **Vurdering:** Port 445 er spesielt relevant for prosjektet fordi klienten bruker den delte mappen `Felles`. Skanningen viser hvilke tjenester som er tilgjengelige fra klienten, men beviser ikke alene at tjenestene er sikkert konfigurert.
 
-**Dokumentasjon:** Jeg skal legge til et skjermbilde av Nmap-resultatet i prosjektets `images`-mappe.
+Dokumentasjon: Skjermbildet under viser resultatet av Nmap-skanningen av SERVER01, inkludert identifiserte åpne TCP-porter og tjenester.
+![Nmap-test av SERVER01](images/oppgave%20nmap.png)
 
 ### 6.2 Wireshark – ICMP
 
@@ -204,10 +204,10 @@ Jeg startet en pakkefangst i Wireshark på Ethernet-grensesnittet og utførte en
 
 Dette viser at klienten sendte en ICMP-forespørsel til serveren, og at serveren sendte et svar tilbake. Resultatet samsvarer med ping-testen, som fikk svar fra serveren.
 
+
+
+Dokumentasjon: Skjermbildet under viser ICMP Echo Request fra CLIENT01 til SERVER01 og ICMP Echo Reply tilbake til klienten.
 ![Wireshark ICMP-test](images/wireshark%20oppgave.png)
-
-
-**Dokumentasjon:** Legg ved et skjermbilde fra Wireshark som viser både request og reply.
 
 #### TCP og SMB-fildeling
 
@@ -226,6 +226,7 @@ Sammen med den vellykkede testen der jeg åpnet delingen og opprettet en testfil
 
 
 ![Wireshark TCP-test mot port 445](images/wireshark%20tcp%206.2.png)
+Skjermbildet viser TCP three-way handshake mellom CLIENT01 og SERVER01 på port 445. Dette dokumenterer opprettelsen av TCP-forbindelsen som brukes ved SMB-fildeling.
 
 
 
