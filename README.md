@@ -34,7 +34,7 @@ Kravspesifikasjonen beskriver hva nettverkene skal kunne gjøre når prosjektet 
 |---|---|---|
 | K01 | SERVER01 og CLIENT01 skal kommunisere i det fysiske labnettet. | Ping mellom klient og server. |
 | K02 | SERVER01 skal ha fast IP-adresse. | Kontrollere IP-konfigurasjonen. |
-| K03 | CLIENT01 skal motta nettverksinnstillinger fra R1 via DHCP. | Kontrollere med `ipconfig /all`. |
+| K03 | CLIENT01 skal motta nettverksinnstillinger automatisk fra ruteren via DHCP | Kontrollere med `ipconfig /all`. |
 | K04 | CLIENT01 skal kunne bruke en tjeneste på SERVER01. | Åpne en delt mappe og opprette en testfil. |
 | K05 | Packet Tracer-nettverket skal ha flere LAN og routing mellom dem. | Teste kommunikasjon mellom forskjellige LAN. |
 | K06 | Packet Tracer-klientene skal få riktige nettverksinnstillinger og kunne bruke DNS og HTTP. | Kontrollere DHCP og åpne intranettsiden med DNS-navn. |
