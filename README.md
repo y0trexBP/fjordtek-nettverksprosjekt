@@ -37,7 +37,7 @@ Kravspesifikasjonen beskriver hva nettverkene skal kunne gjøre når prosjektet 
 | K03 | CLIENT01 skal motta nettverksinnstillinger automatisk fra ruteren via DHCP | Kontrollere med `ipconfig /all`. |
 | K04 | CLIENT01 skal kunne bruke en tjeneste på SERVER01. | Åpne en delt mappe og opprette en testfil. |
 | K05 | Packet Tracer-nettverket skal ha flere LAN og routing mellom dem. | Teste kommunikasjon mellom forskjellige LAN. |
-| K06 | Packet Tracer-klientene skal få riktige nettverksinnstillinger og kunne bruke DNS og HTTP. | Kontrollere DHCP og åpne intranettsiden med DNS-navn. |
+| K06 | Packet Tracer-klientene skal få riktige nettverksinnstillinger og kunne bruke DNS og HTTP. | Testresultat: DHCP er konfigurert for klientnettverkene. DNS-navnet intranett.fjordtek.local peker til serveren 192.168.30.10, og HTTP-tjenesten er aktivert. Klientene ble testet ved å åpne intranettsiden med DNS-navnet. Testene er dokumentert med skjermbilder i seksjon 8.3. |
 | K07 | Nettverksløsningene skal testes og dokumenteres. | Dokumentere tester og resultater fra begge delene. |
 | K08 | Trafikken mellom CLIENT01 og SERVER01 skal undersøkes i Wireshark. | Fange opp ICMP- og TCP-trafikk og undersøke kilde- og mål-IP. |
 
