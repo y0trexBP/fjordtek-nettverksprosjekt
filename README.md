@@ -3,7 +3,7 @@
 **Fag:** IT / nettverk  
 **Elev:** Thomas Lauritzen 
 **Skole:** Kuben VGs
-**Dato:** 10/30/2026  
+**Dato:** 30/10/2026  
 **Status:** Ferdig
 
 ## 1. Innledning og oppdragsbeskrivelse
