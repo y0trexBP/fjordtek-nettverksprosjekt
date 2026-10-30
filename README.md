@@ -328,6 +328,13 @@ Jeg konfigurerte DNS-navnet `intranett.fjordtek.local` til å peke på serveren 
 DNS-navnet `intranett.fjordtek.local` ble brukt for å åpne intranettsiden fra en klient. I Simulation Mode ble DNS- og HTTP-trafikken undersøkt.
 
 ![DNS og HTTP i Packet Tracer](images/cisco%20dns%26http%20test2.png)
+### Test av intranettside fra klient-PC
+
+For å kontrollere at DNS og HTTP fungerer sammen, åpnet jeg nettleseren på en klient-PC i Packet Tracer og skrev inn `intranett.fjordtek.local`.
+
+Nettsiden ble åpnet fra klienten. Dette viser at klienten klarer å slå opp DNS-navnet og få tilgang til webserveren via HTTP.
+
+![Klient åpner intranettsiden i Packet Tracer](images/cisco%20nettside%20oppgave.png)
 
 ## 9. Feilsøking
 
@@ -418,6 +425,7 @@ fjordtek-nettverksprosjekt/
     ├── klient-pc-tillgang.png
     ├── oppgave nmap.png
     ├── wireshark oppgave.png
+    ├── cisco nettside oppgave.png
     └── wireshark tcp 6.2.png
 ```
 
